@@ -1,4 +1,5 @@
 def validaCpf(cpf, d1=0, d2=0, i=0):
+    #Autor: Shalon Serpa (serpanet@gmail.com)
     while i < 10:
         d1, d2, i = (d1 + (int(cpf[i]) * (11 - i - 1))) % 11 if i < 9 else d1, (
                 d2 + (int(cpf[i]) * (11 - i))) % 11, i + 1
