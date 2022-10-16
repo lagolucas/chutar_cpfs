@@ -7,15 +7,26 @@ def validaCpf(cpf, d1=0, d2=0, i=0):
 
 if __name__ == '__main__':
     # xxx.452.748-44
+    print('formato xxx.452.748-44')
     cpf_string = input("Digite o cpf, utilize x onde não souber o dígito: ")
     cpf_string = cpf_string.replace(".", "").replace("-", "").replace(" ", "")
 
-    number = cpf_string.count('x')
+    cpf_array = list(cpf_string)
 
 
-    for i in range (1, 10**(number)-1):
-        cpf = cpf_string.replace("x", "")
-        cpf = (str(i)+cpf).zfill(11)
-        if validaCpf(cpf):
-            print(cpf)
+    x_pos_array = [i for i, x in enumerate(cpf_array) if x == "x"]
+    
+    for number in range(1, 10**len(x_pos_array)):
+        i = 0
+        number_array = list(str(number).zfill(len(x_pos_array)))
+        for pos in x_pos_array:
+            cpf_array[pos] = str(number_array[i])
+            i += 1
 
+        if validaCpf(''.join(cpf_array)):
+            cpf_print = cpf_array.copy()
+            cpf_print.insert(3, '.')
+            cpf_print.insert(7, '.')
+            cpf_print.insert(11, '-')
+            print(''.join(cpf_print), end='\n\n')
+#426.7*9.168-3*
